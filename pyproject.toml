@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "chi23-papers"
+version = "0.1.0"
+description = ""
+authors = ["Takeshi Teshima <takeshi.diadochos@gmail.com>"]
+readme = "README.md"
+packages = [{include = "chi23_papers"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pybtex = "^0.24.0"
+streamlit = "^1.25.0"
+
+[tool.poetry.group.dev.dependencies]
+pudb = "^2022.1.3"
+ipython = "^8.14.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
