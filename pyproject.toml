@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["Takeshi Teshima <takeshi.diadochos@gmail.com>"]
 readme = "README.md"
-packages = [{include = "chi23_papers"}]
+packages = [{include="src", from="./src"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -14,6 +14,8 @@ pandas = "^2.0.3"
 numpy = "^1.25.2"
 retrying = "^1.3.4"
 openai = "^0.27.8"
+pylatexenc = "^2.10"
+certifi = "^2023.7.22"
 
 [tool.poetry.group.dev.dependencies]
 pudb = "^2022.1.3"

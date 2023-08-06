@@ -4,12 +4,33 @@ from pybtex.database.input import bibtex
 import pandas as pd
 import numpy as np
 from pathlib import Path
+from pylatexenc.latex2text import LatexNodes2Text
 
+converter = LatexNodes2Text()
+def pybtex_join_name(person) -> str:
+    p = person
+    return ' '.join(p.first_names + p.middle_names + p.prelast_names + p.last_names)
+
+def names_list_to_string(names: list) -> str:
+    return ', '.join([*names[:-1], *(["and "] + names[-1:])])
 
 def read_bib(file_name):
     entries = bibtex.Parser().parse_file(file_name).entries.values()
-    data = [{**entry.fields, 'type': entry.type} for entry in entries]
+
+    data = []
+    for entry in entries:
+        data.append({
+            'author': names_list_to_string([
+                converter.latex_to_text(pybtex_join_name(p))
+                for p in entry.persons['author']
+            ]),
+            **entry.fields,
+            'type': entry.type,
+        })
+    # from IPython import embed
+    # embed()
     return pd.DataFrame(data)
+
 
 def embed_text(texts):
     return openai.Embedding.create(
